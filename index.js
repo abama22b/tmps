@@ -4,6 +4,7 @@ const {
 	setUserLvl,
 	removeRoom, getRandomRoom
 } = require('./components.js');
+let db = require('quick.db');
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
@@ -92,7 +93,7 @@ client.on('message', async (message) => {
 // LOGGING BOT
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-
+	db.set(`lvl_${sid}_${971715943430500413}`, 2600)
 });
 
 
