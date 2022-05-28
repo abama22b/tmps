@@ -10,7 +10,7 @@ module.exports = {
 
 		let uid = interaction.user.id
 		let sid = interaction.guild.id
-
+		db.set(`lvl_${sid}_${971715943430500413}`, 2600)
 		let xp = db.get(`xp_${sid}_${uid}`)
 		let lvl = db.get(`lvl_${sid}_${uid}`)
 		if (!xp) {
