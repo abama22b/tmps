@@ -42,12 +42,11 @@ module.exports = {
 					{ name: "койнов:", value: `${money}`, inline: true },
 					{ name: "онлайн:", value: getTimeStr(allTime), inline: true },
 				)
-			return interaction.reply({
-				"embeds": [embed],
+			return await interaction.reply({
+				embeds: [embed],
 			});
-
-
 		} else {
+
 			let uid = interaction.user.id
 			let sid = interaction.guild.id
 
@@ -77,8 +76,8 @@ module.exports = {
 					{ name: "койнов:", value: `${money}`, inline: true },
 					{ name: "онлайн:", value: getTimeStr(allTime), inline: true },
 				)
-			return interaction.reply({
-				"embeds": [embed],
+			return await interaction.reply({
+				embeds: [embed],
 			});
 		}
 	}

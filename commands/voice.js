@@ -47,8 +47,9 @@ module.exports = {
 				{ name: "За сутки", value: getTimeStr(dayTime), inline: true },
 				{ name: "За всё время", value: getTimeStr(allTime), inline: true },
 			)
-		return interaction.reply({
-			"embeds": [embed],
+
+		return await interaction.reply({
+			embeds: [embed],
 		});
 	},
 };

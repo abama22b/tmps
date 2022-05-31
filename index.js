@@ -4,18 +4,10 @@ const {
 	setUserLvl,
 	removeRoom, getRandomRoom
 } = require('./components.js');
-let db = require('quick.db');
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
-var express = require('express');
-var app = express();
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-	res.send('hello world');
-});
-app.listen(process.env.PORT || 3000)
 const client = new Client({
 	intents: [
 		Intents.FLAGS.GUILDS,
@@ -99,7 +91,6 @@ client.on('message', async (message) => {
 // LOGGING BOT
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-
 });
 
 

@@ -9,10 +9,8 @@ module.exports = {
 		.addIntegerOption(option => option.setName('amount').setDescription('Сумма перевода')),
 	async execute(interaction) {
 		const user = interaction.options.getUser('target')
-		let amount = interaction.options.getInteger('amount')
+		const amount = interaction.options.getInteger('amount')
 
-		if (!amount) return interaction.reply('**Заполните все поля!**')
-		if (!user) return interaction.reply('**Заполните все поля!**')
 
 		let uid = interaction.user.id
 		let sid = interaction.guild.id
@@ -30,19 +28,37 @@ module.exports = {
 			money = 0
 		}
 
-		if (!(user && amount)) return interaction.reply('**Заполните** все **поля**')
-		if (!(money > amount)) return interaction.reply('У **вас** недостаточно **койнов!**')
-		if (!(amount <= 50)) return interaction.reply('**Минимальнальная** сумма перевода **50 койнов**')
+		if (money < amount)
+			return await interaction.reply({
+				content: `<@${interaction.user.id}>, **У** вас **недостаточно ${amount - money}** <:durkas:975796782367907921>`,
+				ephemeral: true
+			})
+		if (!(amount >= 50))
+			return await interaction.reply({
+				content: `<@${interaction.user.id}>, **Минимальна** сумма **50**<:durkas:975796782367907921>`,
+				ephemeral: true
+			})
+		if (!amount)
+			return await interaction.reply({
+				content: `<@${interaction.user.id}>, **Минимальна** сумма **50**<:durkas:975796782367907921>`,
+				ephemeral: true
+			})
+
 		if (user) {
 			db.set(`money_${sid}_${uid}`, money - amount)
 			db.set(`money_${sid}_${fid}`, fmoney + Math.floor(amount * 0.96))
 
 			const embed = new MessageEmbed()
 				.setTitle('Передача валюты')
-				.setDescription(`<@${interaction.user.id}>,  Вы передали пользователю <@${user.id}> ${amount} <:durkas:975796782367907921>, включая комиссию 4%`)
+				.setDescription(`<@${interaction.user.id}>,  Вы **передали** пользователю <@${user.id}> ${amount} <:durkas:975796782367907921>, включая комиссию 4%`)
 				.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: false })}`)
-			return interaction.reply({
-				"embeds": [embed],
+			return await interaction.reply({
+				embeds: [embed],
+			});
+		} else {
+			return await interaction.reply({
+				content: `<@${interaction.user.id}>, У **вас** недостаточно **койнов!**`,
+				ephemeral: true
 			});
 		}
 	},

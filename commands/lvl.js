@@ -10,12 +10,14 @@ module.exports = {
 
 		let uid = interaction.user.id
 		let sid = interaction.guild.id
+
 		let xp = db.get(`xp_${sid}_${uid}`)
-		let lvl = db.get(`lvl_${sid}_${uid}`)
 		if (!xp) {
 			db.set(`xp_${sid}_${uid}`, 0)
 			xp = 0
 		}
+
+		let lvl = db.get(`lvl_${sid}_${uid}`)
 		if (!lvl) {
 			db.set(`lvl_${sid}_${uid}`, 1)
 			lvl = 1
@@ -27,8 +29,8 @@ module.exports = {
 				{ name: "уровень:", value: `${lvl}`, inline: true },
 				{ name: "опыт:", value: `${xp}/30`, inline: true },
 			)
-		return interaction.reply({
-			"embeds": [embed],
+		return await interaction.reply({
+			embeds: [embed],
 		});
 	},
 };

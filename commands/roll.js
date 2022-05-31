@@ -5,7 +5,7 @@ let db = require('quick.db')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
-		.setDescription('Ежедневная награда'),
+		.setDescription('Временные награда'),
 	async execute(interaction) {
 		let uid = interaction.user.id
 		let sid = interaction.guild.id
@@ -30,11 +30,12 @@ module.exports = {
 			db.set(`date_${sid}_${uid}`, today + 43200000)
 
 			const embed = new MessageEmbed()
-				.setTitle('Ежедневная награды')
+				.setTitle('Временные награда')
 				.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
 				.setDescription(`<@${interaction.user.id}> Ваша **награда** на сегодня **${roll}** <:durkas:975796782367907921>. **Возвращайтесь** через **12** часов.`, true)
-			return interaction.reply({
-				"embeds": [embed],
+
+			return await interaction.reply({
+				embeds: [embed],
 			});
 
 		} else {
@@ -44,11 +45,12 @@ module.exports = {
 			let seconds = Math.floor((term / 1000) % 60);
 
 			const embed = new MessageEmbed()
-				.setTitle('Ежедневная награда')
+				.setTitle('Временные награда')
 				.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
 				.setDescription(`<@${interaction.user.id}> Вы **уже** забрали **ежедневную** награду! Вы можете **получить** следующую через **${hours}** часа, **${minutes}** минут, **${seconds}** секунду`, true)
-			return interaction.reply({
-				"embeds": [embed],
+
+			return await interaction.reply({
+				embeds: [embed],
 			});
 		}
 	},

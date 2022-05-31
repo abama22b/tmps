@@ -9,20 +9,20 @@ module.exports = {
 	async execute(interaction) {
 		let uid = interaction.user.id
 		let sid = interaction.guild.id
+
 		let money = db.get(`money_${sid}_${uid}`)
-		if (money == null) {
+		if (!money) {
 			db.set(`money_${sid}_${uid}`, 0)
 			money = 0
 		}
-		const Embed = new MessageEmbed()
+		const embed = new MessageEmbed()
 			.setTitle(`Текущий баланс — ${interaction.user.username}`)
 			.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
-			.addFields(
-				{ name: "койнов:", value: `${money}`, inline: true },
-				{ name: "осколков:", value: `0`, inline: true },
+			.addField(
+				"койнов:", `${money}`, true
 			)
-		return interaction.reply({
-			"embeds": [Embed],
+		return await interaction.reply({
+			embeds: [embed],
 		});
 	},
 };
