@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node  ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "node  ./index.js",
+    "build": "echo aboba"
   },
   "repository": {
     "type": "git",
