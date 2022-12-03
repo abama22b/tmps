@@ -30,10 +30,9 @@ module.exports = {
 
 
 		const embed = new MessageEmbed()
-			.setTitle('Магазин личных ролей')
+			.setTitle('Магазин личных ролей!')
 			.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: false })}`)
 			.addFields(...listRole)
-		// .setFooter(`${page}/${tmppage}`)
 
 		const buttons = new MessageActionRow().addComponents(
 			new MessageButton()
@@ -78,7 +77,7 @@ module.exports = {
 						.setTitle('Магазин личных ролей')
 						.setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: false })}`)
 						.addFields(...getShopList(myItems, pages))
-					// .setFooter(`${page}/${tmppage}`)
+					
 
 					return await interaction.editReply({
 						embeds: [embed],
