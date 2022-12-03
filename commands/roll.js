@@ -39,7 +39,7 @@ module.exports = {
 			});
 
 		} else {
-			let term = date - today
+			let term = date - new Date().getTime()
 			let hours = Math.floor((term / (1000 * 60 * 60)) % 24);
 			let minutes = Math.floor((term / (1000 * 60)) % 60);
 			let seconds = Math.floor((term / 1000) % 60);
